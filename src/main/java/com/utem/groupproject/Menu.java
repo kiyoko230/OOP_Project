@@ -77,9 +77,19 @@ public class Menu extends javax.swing.JFrame {
         editMenu.setText("Edit");
 
         propertiesMenuItem.setText("Item's Properties");
+        propertiesMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                propertiesMenuItemActionPerformed(evt);
+            }
+        });
         editMenu.add(propertiesMenuItem);
 
         deleteItem.setText("Delete Item");
+        deleteItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteItemActionPerformed(evt);
+            }
+        });
         editMenu.add(deleteItem);
 
         jMenuBar1.add(editMenu);
@@ -221,6 +231,16 @@ public class Menu extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_sortMenuItemActionPerformed
+
+    private void propertiesMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_propertiesMenuItemActionPerformed
+        // TODO add your handling code here:
+        new Edit().setVisible(true);
+    }//GEN-LAST:event_propertiesMenuItemActionPerformed
+
+    private void deleteItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteItemActionPerformed
+        // TODO add your handling code here:
+        new Delete().setVisible(true);
+    }//GEN-LAST:event_deleteItemActionPerformed
 
     /**
      * @param args the command line arguments

@@ -48,11 +48,17 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Item&apos;s Properties"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="propertiesMenuItemActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="deleteItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Delete Item"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteItemActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

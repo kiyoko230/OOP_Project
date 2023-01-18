@@ -82,6 +82,7 @@ public class ItemManager{
         {
             JOptionPane.showMessageDialog(null,err.getMessage());
         }
+         JOptionPane.showMessageDialog(null,"Connected");
         return drinkList;
     }
     
@@ -154,5 +155,132 @@ public class ItemManager{
         else{
             //searchDrink();
         }
+    }
+    
+    public void editDrink(String editDrinkID, Drink drink) throws ClassNotFoundException{
+        String arrival = drink.getArrivalDate();
+        String expired = drink.getExpireDate();
+        double price = drink.getItemPrice();
+        int qty = drink.getItemQuantity();
+        
+        try{
+            String SQL = "UPDATE drink SET ARRIVALDATE=?, EXPIREDDATE=?, PRICE = ?, QUANTITY = ?, WHERE DRINKID = ?";
+            //Declare object to execute parameterized query
+            PreparedStatement ps = db.openConnection().prepareStatement(SQL);
+            ps.setString(1, arrival);
+            ps.setString(2, expired);
+            ps.setDouble(3, price);
+            ps.setInt(4,qty);
+            ps.setString(5, editDrinkID);
+            ps.executeUpdate();
+        }
+        catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+    }
+    
+     public void editFood(String editFoodID, Food food) throws ClassNotFoundException{
+        String arrival = food.getArrivalDate();
+        String expired = food.getExpireDate();
+        double price = food.getItemPrice();
+        int qty = food.getItemQuantity();
+        
+        try{
+            String SQL = "UPDATE food SET ARRIVALDATE=?, EXPIREDDATE=?, PRICE = ?, QUANTITY = ?, WHERE FOODID = ?";
+            //Declare object to execute parameterized query
+            PreparedStatement ps = db.openConnection().prepareStatement(SQL);
+            ps.setString(1, arrival);
+            ps.setString(2, expired);
+            ps.setDouble(3, price);
+            ps.setInt(4,qty);
+            ps.setString(5, editFoodID);
+            ps.executeUpdate();
+        }
+        catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+    }
+    
+    
+    public void deleteDrink(String deleteDrinkID) throws ClassNotFoundException{
+        try{           
+            String SQL = "DELETE FROM drink where DRINKID=?";
+            PreparedStatement ps = db.openConnection().prepareStatement(SQL);
+            ps.setString(1, deleteDrinkID);
+            ps.executeUpdate();       
+        }
+        catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+    }
+
+    public void deleteFood(String deleteFoodID) throws ClassNotFoundException{
+        try{           
+            String SQL = "DELETE FROM food where FOODID=?";
+            PreparedStatement ps = db.openConnection().prepareStatement(SQL);
+            ps.setString(1, deleteFoodID);
+            ps.executeUpdate();       
+        }
+        catch(SQLException err){
+            JOptionPane.showMessageDialog(null, err.getMessage());
+        }
+    }
+    
+    public Food searchFood(String searchID) throws ClassNotFoundException{
+        try{
+                        
+            String SQL = "SELECT * FROM Food where FOODID=?";
+            
+            PreparedStatement ps = db.openConnection().prepareStatement(SQL);
+            
+            ps.setString(1,searchID);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                
+                food.setItemID(rs.getString("FOODID"));
+                food.setItemName(rs.getString("NAME"));
+                food.setItemType(rs.getString("TYPE"));
+                food.setArrivalDate(rs.getString("ARRIVALDATE"));
+                food.setArrivalDate(rs.getString("EXPIREDDATE"));
+                food.setItemPrice(rs.getDouble("PRICE"));
+                food.setItemQuantity(rs.getInt("QUANTITY"));
+                
+            }
+        }
+        catch(SQLException err){
+            JOptionPane.showMessageDialog(null,err.getMessage());
+        }
+        return food;
+    }
+    
+    public Drink searchDrink(String searchID) throws ClassNotFoundException{
+        try{
+                        
+            String SQL = "SELECT * FROM Drink where DRINKID=?";
+            
+            PreparedStatement ps = db.openConnection().prepareStatement(SQL);
+            
+            ps.setString(1,searchID);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            if(rs.next()){
+                
+                food.setItemID(rs.getString("DRINKID"));
+                food.setItemName(rs.getString("NAME"));
+                food.setItemType(rs.getString("TYPE"));
+                food.setArrivalDate(rs.getString("ARRIVALDATE"));
+                food.setArrivalDate(rs.getString("EXPIREDDATE"));
+                food.setItemPrice(rs.getDouble("PRICE"));
+                food.setItemQuantity(rs.getInt("QUANTITY"));
+                
+            }
+        }
+        catch(SQLException err){
+            JOptionPane.showMessageDialog(null,err.getMessage());
+        }
+        return drink;
     }
 }
